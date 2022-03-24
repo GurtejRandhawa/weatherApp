@@ -33,6 +33,8 @@ const WeatherData = ({ data }) => {
   if (data.weather[0].main == 'Haze') source = mist;
   if (data.weather[0].main == 'Clear') source = summer;
   if (data.weather[0].main == 'Mist') source = mist;
+    if (data.weather[0].main == 'Smoke') source = mist;
+
 
     return (
       <View style={styles.container} onStartShouldSetResponder={() => true}>
