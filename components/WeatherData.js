@@ -9,10 +9,17 @@ const WeatherData = ({ data }) => {
   return (
     <View style={styles.container} onStartShouldSetResponder={() => true}>
       <ScrollView style={styles.containerInner}>
-        <Text style={styles.title}>{data.name} - {data.sys.country}</Text>
+        <Text style={styles.title}>
+          {data.name} - {data.sys.country}
+        </Text>
         <View style={styles.box}>
           <Text style={styles.boxLabel}>{data.weather[0].description}</Text>
-          <Image style={styles.image} source={{ uri: `http://openweathermap.org/img/wn/${data.weather[0].icon}.png` }} />
+          <Image
+            style={styles.image}
+            source={{
+              uri: `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`,
+            }}
+          />
         </View>
         <View style={styles.box}>
           <Text style={styles.boxLabel}>Temp</Text>
