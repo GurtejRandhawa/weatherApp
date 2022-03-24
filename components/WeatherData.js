@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { useState } from 'react';
@@ -23,92 +23,88 @@ const WeatherData = ({ data }) => {
   const spring = require('../Assets/spring.jpg');
   const summer = require('../Assets/summer.jpg');
   const winter = require('../Assets/winter.jpg');
-  const rain = require('../Assets/rain.jpg'); 
+  const rain = require('../Assets/rain.jpg');
   const cloud = require('../Assets/cloud.jpg');
-  let source =''
+  let source = '';
+  console.log(data)
 
-
-  if (data.weather[0].main=='Clouds')
-  source = cloud
+  if (data.weather[0].main == 'Clouds') source = cloud;
   if (data.weather[0].main == 'Haze') source = mist;
   if (data.weather[0].main == 'Clear') source = summer;
   if (data.weather[0].main == 'Mist') source = mist;
-    if (data.weather[0].main == 'Smoke') source = mist;
+  if (data.weather[0].main == 'Smoke') source = mist;
+  if (data.weather[0].main == 'Rain') source = rain;
+  if (data.weather[0].main == 'Snow') source = winter;
 
-
-    return (
-      <View style={styles.container} onStartShouldSetResponder={() => true}>
-        <Modal
-          isVisible={isModalVisible}
-          style={styles.modal}
-          coverScreen={true}
-          useNativeDriver={true}
-          animationIn='slideInUp'
-          animationOut='slideOutDown'
-          animationInTiming={800}
-          animationOutTiming={800}
+  return (
+    <View style={styles.container} onStartShouldSetResponder={() => true}>
+      <Modal
+        isVisible={isModalVisible}
+        style={styles.modal}
+        coverScreen={true}
+        useNativeDriver={true}
+        animationIn='slideInUp'
+        animationOut='slideOutDown'
+        animationInTiming={800}
+        animationOutTiming={800}
+      >
+        <ImageBackground
+          source={source}
+          resizeMode='cover'
+          style={styles.bgImage}
         >
-          <ImageBackground
-            source={source}
-            resizeMode='cover'
-            style={styles.bgImage}
-          >
-            <ScrollView style={styles.containerInner}>
-              <Text style={styles.title}>
-                {data.name} - {data.sys.country}
-              </Text>
-              <View style={styles.box}>
-                <Text style={styles.boxLabel}>
-                  {data.weather[0].description}
-                </Text>
-                <Image
-                  style={styles.image}
-                  source={{
-                    uri: `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`,
-                  }}
-                />
-              </View>
-              <View style={styles.box}>
-                <Text style={styles.boxLabel}>Temp</Text>
-                <View style={styles.tempContainer}>
-                  <Text style={styles.boxText}>{data.main.temp}K</Text>
-                  <Text style={styles.boxText}>{fahrenheit}&#8457;</Text>
-                  <Text style={styles.boxText}>{celsius}&#8451;</Text>
-                </View>
-              </View>
-              <View style={styles.box}>
-                <Text style={styles.boxLabel}>Humidity</Text>
-                <Text style={styles.boxText}>{data.main.humidity}%</Text>
-              </View>
-              <View style={styles.box}>
-                <Text style={styles.boxLabel}>Pressure</Text>
-                <Text style={styles.boxText}>
-                  {data.main.pressure + ' '}hPa
-                </Text>
-              </View>
-              <View style={styles.box}>
-                <Text style={styles.boxLabel}>Wind</Text>
-                <Text style={styles.boxText}>{data.wind.speed} m/s</Text>
-              </View>
-              <TouchableOpacity
-                onPress={toggleModal}
-                style={{
-                  backgroundColor: '#ff4d4d',
-                  alignItems: 'center',
-                  borderRadius: 5,
-                  width: 150,
-                  height: 50,
-                  alignSelf: 'center',
-                  justifyContent: 'center',
+          <ScrollView style={styles.containerInner}>
+            <Text style={styles.title}>
+              {data.name} - {data.sys.country}
+            </Text>
+            <View style={styles.box}>
+              <Text style={styles.boxLabel}>{data.weather[0].description}</Text>
+              <Image
+                style={styles.image}
+                source={{
+                  uri: `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`,
                 }}
-              >
-                <Text style={{ color: '#fff' }}>Close</Text>
-              </TouchableOpacity>
-            </ScrollView>
-          </ImageBackground>
-        </Modal>
-      </View>
-    );
+              />
+            </View>
+            <View style={styles.box}>
+              <Text style={styles.boxLabel}>Temp</Text>
+              <View style={styles.tempContainer}>
+                <Text style={styles.boxText}>{data.main.temp}K</Text>
+                <Text style={styles.boxText}>{fahrenheit}&#8457;</Text>
+                <Text style={styles.boxText}>{celsius}&#8451;</Text>
+              </View>
+            </View>
+            <View style={styles.box}>
+              <Text style={styles.boxLabel}>Humidity</Text>
+              <Text style={styles.boxText}>{data.main.humidity}%</Text>
+            </View>
+            <View style={styles.box}>
+              <Text style={styles.boxLabel}>Pressure</Text>
+              <Text style={styles.boxText}>{data.main.pressure + ' '}hPa</Text>
+            </View>
+            <View style={styles.box}>
+              <Text style={styles.boxLabel}>Wind</Text>
+              <Text style={styles.boxText}>{data.wind.speed} m/s</Text>
+            </View>
+            <TouchableOpacity
+              onPress={toggleModal}
+              style={{
+                backgroundColor: '#ff4d4d',
+                alignItems: 'center',
+                borderRadius: 5,
+                width: 150,
+                height: 50,
+                alignSelf: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Text style={{ color: '#fff' }}>Close</Text>
+            </TouchableOpacity>
+          </ScrollView>
+        </ImageBackground>
+      </Modal>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
