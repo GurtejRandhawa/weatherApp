@@ -20,7 +20,7 @@ const App = () => {
 
   const searchSubmitHandler = () => {
     if (search === '') {
-      return Alert.alert('Validation', 'City name is required!', [
+      return Alert.alert('Oops!', 'City name cannot be empty!', [
         { text: 'OK' },
       ]);
     }
@@ -33,8 +33,10 @@ const App = () => {
         () => setLoading(false)
       )
     );
-    setSearch('');
     Keyboard.dismiss();
+  };
+  const clearField = () => {
+    setSearch('');
   };
 
   return (
@@ -44,6 +46,7 @@ const App = () => {
           search={search}
           onSetSearch={setSearch}
           onSubmit={searchSubmitHandler}
+          onClear={clearField}
         />
         <Weather loading={loading} data={data} error={error} />
       </View>
