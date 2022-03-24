@@ -26,9 +26,10 @@ const WeatherData = ({ data }) => {
         style={styles.modal}
         coverScreen={true}
         useNativeDriver={true}
-        animationIn='fadeIn'
-        animationOut='fadeOut'
+        animationIn='slideInUp'
+        animationOut='slideOutDown'
         animationInTiming={800}
+        animationOutTiming={800}
       >
         <ScrollView style={styles.containerInner}>
           <Text style={styles.title}>
