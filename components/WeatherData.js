@@ -35,6 +35,7 @@ const WeatherData = ({ data }) => {
   if (data.weather[0].main == 'Smoke') source = mist;
   if (data.weather[0].main == 'Rain') source = rain;
   if (data.weather[0].main == 'Snow') source = winter;
+  if (data.weather[0].main == 'Drizzle') source = rain;
 
   return (
     <View style={styles.container} onStartShouldSetResponder={() => true}>
