@@ -27,10 +27,10 @@ const Form = ({ search, onSetSearch, onSubmit, onClear }) => {
         <Button color='#ffc400' title='CLear' onPress={onClear} /> */}
         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
           <TouchableOpacity onPress={onClear} style={styles.buttons}>
-            <Text style={{ color: '#fff' }}>Clear</Text>
+            <Text style={{ color: 'black' }}>Clear</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={onSubmit} style={styles.buttons}>
-            <Text style={{ color: '#fff' }}>Search</Text>
+            <Text style={{ color: 'black' }}>Search</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -47,11 +47,13 @@ const styles = StyleSheet.create({
     fontSize: 25,
     // textAlign: 'center',
     marginBottom: 30,
+    color: 'black',
   },
   subHeading: {
     fontSize: 15,
     // textAlign: 'center',
     marginBottom: 20,
+    color: 'black',
   },
   input: {
     borderWidth: 1,

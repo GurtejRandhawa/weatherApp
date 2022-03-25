@@ -67,6 +67,7 @@ const WeatherData = ({ data }) => {
         animationOut='slideOutDown'
         animationInTiming={800}
         animationOutTiming={800}
+        onBackButtonPress={()=>{toggleModal()}}
       >
         <ImageBackground
           source={source}
