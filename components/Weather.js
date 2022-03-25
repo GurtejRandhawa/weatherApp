@@ -7,7 +7,7 @@ import WeatherData from './WeatherData';
 const Weather = ({ loading, data, error }) => {
   if (error) {
     return <View style={styles.container}>
-      <Text style={styles.error}>No Match Found!</Text>
+      <Text style={styles.error}>No Match Found!&#x1F614;</Text>
     </View>;
   }
 
