@@ -30,7 +30,7 @@ const Form = ({ search, onSetSearch, onSubmit, onClear }) => {
             <Text style={{ color: '#fff' }}>Clear</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={onSubmit} style={styles.buttons}>
-            <Text style={{ color: '#fff' }}>Submit</Text>
+            <Text style={{ color: '#fff' }}>Search</Text>
           </TouchableOpacity>
         </View>
       </View>

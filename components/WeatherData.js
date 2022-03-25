@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
+  Share,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import { useState } from 'react';
@@ -26,7 +27,7 @@ const WeatherData = ({ data }) => {
   const rain = require('../Assets/rain.jpg');
   const cloud = require('../Assets/cloud.jpg');
   let source = '';
-  console.log(data)
+  console.log(data);
 
   if (data.weather[0].main == 'Clouds') source = cloud;
   if (data.weather[0].main == 'Haze') source = mist;
@@ -36,6 +37,24 @@ const WeatherData = ({ data }) => {
   if (data.weather[0].main == 'Rain') source = rain;
   if (data.weather[0].main == 'Snow') source = winter;
   if (data.weather[0].main == 'Drizzle') source = rain;
+
+  const onShare = async (data) => {
+    try {
+      const result = await Share.share({
+        message:
+          `Weather details of ${data.name} (${data.sys.country}) :-` +
+          `\n\n1) ${data.weather[0].description.toUpperCase()}` +
+          `\n2) Temperature - ${celsius}` +
+          '\u{00B0}' +
+          'C' +
+          `\n3) Humidity - ${data.main.humidity}%` +
+          `\n5) Wind - ${data.wind.speed} m/s` +
+          `\n4) Pressure - ${data.main.pressure} hPa`,
+      });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <View style={styles.container} onStartShouldSetResponder={() => true}>
@@ -87,20 +106,22 @@ const WeatherData = ({ data }) => {
               <Text style={styles.boxLabel}>Wind</Text>
               <Text style={styles.boxText}>{data.wind.speed} m/s</Text>
             </View>
-            <TouchableOpacity
-              onPress={toggleModal}
-              style={{
-                backgroundColor: '#ff4d4d',
-                alignItems: 'center',
-                borderRadius: 5,
-                width: 150,
-                height: 50,
-                alignSelf: 'center',
-                justifyContent: 'center',
-              }}
+            <View
+              style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}
             >
-              <Text style={{ color: '#fff' }}>Close</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => onShare(data)}
+                style={{ ...styles.buttons, backgroundColor: '#ffc400' }}
+              >
+                <Text style={{ color: '#fff' }}>Share</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={toggleModal}
+                style={{ ...styles.buttons, backgroundColor: '#ff4d4d' }}
+              >
+                <Text style={{ color: '#fff' }}>Close</Text>
+              </TouchableOpacity>
+            </View>
           </ScrollView>
         </ImageBackground>
       </Modal>
@@ -162,6 +183,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     shadowOpacity: 10,
+  },
+  buttons: {
+    alignItems: 'center',
+    borderRadius: 5,
+    width: 150,
+    height: 40,
+    alignSelf: 'center',
+    justifyContent: 'center',
   },
 });
 
