@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   View,
   StyleSheet,
   Alert,
   TouchableWithoutFeedback,
   Keyboard,
+  BackHandler,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -35,9 +36,31 @@ const App = () => {
     );
     Keyboard.dismiss();
   };
+
   const clearField = () => {
     setSearch('');
   };
+
+ useEffect(() => {
+   const backAction = () => {
+     Alert.alert('Hold on!', 'Are you sure you want to exit the App?', [
+       {
+         text: 'Cancel',
+         onPress: () => null,
+         style: 'cancel',
+       },
+       { text: 'YES', onPress: () => BackHandler.exitApp() },
+     ]);
+     return true;
+   };
+
+   const backHandler = BackHandler.addEventListener(
+     'hardwareBackPress',
+     backAction
+   );
+
+   return () => backHandler.remove();
+ }, []);
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
