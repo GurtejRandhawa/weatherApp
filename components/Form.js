@@ -1,8 +1,15 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
 
-const Form = ({ search, onSetSearch, onSubmit }) => {
+const Form = ({ search, onSetSearch, onSubmit, onClear }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Hi there!</Text>
@@ -16,7 +23,16 @@ const Form = ({ search, onSetSearch, onSubmit }) => {
           value={search}
           onChangeText={(val) => onSetSearch(val)}
         />
-        <Button color='#ffc400' title='Search' onPress={onSubmit} />
+        {/* <Button color='#ffc400' title='Search' onPress={onSubmit} />
+        <Button color='#ffc400' title='CLear' onPress={onClear} /> */}
+        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+          <TouchableOpacity onPress={onClear} style={styles.buttons}>
+            <Text style={{ color: 'black' }}>Clear</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onSubmit} style={styles.buttons}>
+            <Text style={{ color: 'black' }}>Search</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -28,25 +44,36 @@ const styles = StyleSheet.create({
     // backgroundColor: '#f1f1f1',
   },
   heading: {
-    fontSize: 20,
+    fontSize: 25,
     // textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 30,
+    color: 'black',
   },
   subHeading: {
     fontSize: 15,
     // textAlign: 'center',
     marginBottom: 20,
+    color: 'black',
   },
   input: {
     borderWidth: 1,
     borderColor: '#dbdbdb',
     borderRadius: 4,
     backgroundColor: '#fff',
-     color: '#363636',
+    color: '#363636',
     paddingVertical: 5,
     paddingHorizontal: 10,
     fontSize: 16,
-    marginBottom: 10,
+    marginBottom: 15,
+  },
+  buttons: {
+    backgroundColor: '#ffc400',
+    alignItems: 'center',
+    borderRadius: 5,
+    width: 150,
+    height: 40,
+    alignSelf: 'center',
+    justifyContent: 'center',
   },
 });
 
