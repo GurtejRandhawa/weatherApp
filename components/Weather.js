@@ -6,9 +6,12 @@ import WeatherData from './WeatherData';
 
 const Weather = ({ loading, data, error }) => {
   if (error) {
-    return <View style={styles.container}>
-      <Text style={styles.error}>No Match Found!&#x1F614;</Text>
-    </View>;
+    return (
+      <View style={styles.container}>
+        {loading ? <ActivityIndicator size='large' color='#00d1b2' />
+        :<Text style={styles.error}>No Match Found!&#x1F614;</Text>}
+      </View>
+    );
   }
 
 
